@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 /**
 *main - this function return if a number is negative or positive or zero
 *Return: 0 success
