@@ -1,21 +1,31 @@
 #include <stdlib.h>
-#include <time.h>
+#include <stdio.h>
 /**
-*main - this function return if a number is negative or positive or zero
+*main - main function
 *Return: 0 success
 */
 int main(void)
 {
-	int n;
+	int c, n, m;
 
-	srand(time(0));
-	n = rand() - RAND_MAX / 2;
-	if (n > 0)
-		printf("%d is positive\n", n);
-	else
-		if (n < 0)
-			printf("%d is negative\n", n);
-		else
-			printf("%d is zero\n", n);
+	for (m = 48; m <= 57; m++)
+	{
+		for (n = 48; n <= 57; n++)
+		{
+			for (c = 48; c <= 57; c++)
+			{
+				putchar(m);
+				putchar(n);
+				putchar(c);
+				if (c != 57 || n != 57 || m != 57)
+				{
+					putchar(',');
+					putchar(' ');
+				}
+			}
+		}
+	}
+	putchar('\n');
 	return (0);
 }
+
