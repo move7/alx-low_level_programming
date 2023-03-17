@@ -6,7 +6,7 @@
 */
 int main(void)
 {
-	int i, j, m, f1, f2, l1, l2;
+	int i, j, f1, f2, l1, l2;
 
 	for (i = 0; i < 100; i++)
 	{
@@ -23,7 +23,7 @@ int main(void)
 				putchar(' ');
 				putchar(f2 + 48);
 				putchar(l2 + 48);
-				if (i != 99 || j != 99)
+				if (i != 98 || j != 99)
 				{
 					putchar(',');
 					putchar(' ');
