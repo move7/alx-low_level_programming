@@ -10,14 +10,14 @@ int main(void)
 
 	for (m = 48; m <= 57; m++)
 	{
-		for (n = 48; n <= 57; n++)
+		for (n = m + 1; n <= 57; n++)
 		{
-			for (c = 48; c <= 57; c++)
+			for (c = n + 1; c <= 57; c++)
 			{
 				putchar(m);
 				putchar(n);
 				putchar(c);
-				if (c != 57 || n != 57 || m != 57)
+				if (m != 55 || n != 56 || c != 57)
 				{
 					putchar(',');
 					putchar(' ');
@@ -28,4 +28,3 @@ int main(void)
 	putchar('\n');
 	return (0);
 }
-
