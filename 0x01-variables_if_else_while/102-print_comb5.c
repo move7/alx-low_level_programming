@@ -12,22 +12,26 @@ int main(void)
 	{
 		for (j = 1; j < 100; j++)
 		{
-			f1 = i / 10;
-			l1 = i % 10;
-			f2 = j / 10;
-			l2 = j % 10;
-			putchar(f1 + 48);
-			putchar(l1 + 48);
-			putchar(' ');
-			putchar(f2 + 48);
-			putchar(l2 + 48);
-			if (i != 99 || j != 99)
+			if (i < j)
 			{
-				putchar(',');
+				f1 = i / 10;
+				l1 = i % 10;
+				f2 = j / 10;
+				l2 = j % 10;
+				putchar(f1 + 48);
+				putchar(l1 + 48);
 				putchar(' ');
+				putchar(f2 + 48);
+				putchar(l2 + 48);
+				if (i != 99 || j != 99)
+				{
+					putchar(',');
+					putchar(' ');
+				}
 			}
 		}
 	}
 	putchar('\n');
 	return (0);
 }
+
