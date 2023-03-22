@@ -5,7 +5,7 @@
  */
 void print_times_table(int n)
 {
-	if (n < 15 && n > 0)
+	if (n < 15 && n >= 0)
 	{
 		int i, j, k;
 
@@ -15,7 +15,7 @@ void print_times_table(int n)
 			{
 				k = i * j;
 				if (k >= 100)
-				{	
+				{
 					_putchar((k / 100) + '0');
 					k = k % 100;
 					_putchar((k / 10) + '0');
