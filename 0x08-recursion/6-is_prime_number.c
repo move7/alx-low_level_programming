@@ -10,7 +10,7 @@ int checker(int n, int i)
 {
 	if (i == 1)
 		return (1);
-	if (n % i)
+	if (n % i == 0)
 		return (0);
 	return (checker(n, i - 1));
 }
