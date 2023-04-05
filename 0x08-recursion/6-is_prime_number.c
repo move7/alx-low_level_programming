@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * checker - check if a number is a prime 
+ * checker - check if a number is a prime
  * @n: number to check
  * @i: iterator
  *
