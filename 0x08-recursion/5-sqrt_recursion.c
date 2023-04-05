@@ -7,13 +7,13 @@
  *
  * Return: square root
  */
-int find_sqrt_recursion (int n, int i)
+int find_sqrt_recursion(int n, int i)
 {
 	if (i * i > n)
 		return (-1);
 	if (i * i == n)
 		return (i);
-	return (find_sqrt_recursion (n, i + 1));
+	return (find_sqrt_recursion(n, i + 1));
 }
 
 /**
