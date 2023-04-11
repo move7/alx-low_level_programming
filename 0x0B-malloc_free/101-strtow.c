@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include "main.h"
 /**
  * **strtow - splits a string into words
  * @str: string to split
@@ -9,7 +11,7 @@
 char **strtow(char *str)
 {
 	char **result, *tmp;
-	int i, k = 0, length = 0, words = 0, c = 0, start, end;
+	int i, k = 0, space, length = 0, words = 0, c = 0, start, end;
 
 	for (int i = 0; str[i] != '\0'; i++)
 	{
@@ -38,7 +40,7 @@ char **strtow(char *str)
 				while (start < i)
 					*tmp++ = str[start++];
 				*tmp = '\0';
-				matrix[k] = tmp - c;
+				result[k] = tmp - c;
 				k++;
 				c = 0;
 			}
@@ -46,7 +48,7 @@ char **strtow(char *str)
 		else if (c++ == 0)
 			start = i;
 	}
-	matrix[k] = NULL;
-	return (matrix);
+	result[k] = NULL;
+	return (result);
 }
 
