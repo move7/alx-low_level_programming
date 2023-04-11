@@ -13,7 +13,7 @@ char **strtow(char *str)
 	char **result, *tmp;
 	int i, k = 0, space, length = 0, words = 0, c = 0, start, end;
 
-	for (int i = 0; str[i] != '\0'; i++)
+	for (i = 0; str[i] != '\0'; i++)
 	{
 		if (str[i] == ' ')
 			space = 1;
