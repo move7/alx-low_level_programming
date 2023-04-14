@@ -13,9 +13,9 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	char *result;
 	unsigned int i, j = 0, length1 = 0, length2 = 0;
 
-	for (i = 0; s1[i] != '\0'; i++)
+	while (s1 && s1[length1])
 		length1++;
-	for (i = 0; s2[i] != '\0'; i++)
+	while (s2 && s2[length2])
 		length2++;
 	if (n > length2)
 		n = length2;
