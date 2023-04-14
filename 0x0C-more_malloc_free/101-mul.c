@@ -24,14 +24,6 @@ int is_digit(char *s)
 }
 
 /**
- * errors - handles errors for main
- */
-void errors(void)
-{
-	printf("Error\n");
-	exit(98);
-}
-/**
  * _strlen - returns the length of a string
  * @s: string to evaluate
  *
@@ -42,8 +34,19 @@ int _strlen(char *s)
 	int i = 0;
 
 	while (s[i] != '\0')
+	{
 		i++;
+	}
 	return (i);
+}
+
+/**
+ * errors - handles errors for main
+ */
+void errors(void)
+{
+	printf("Error\n");
+	exit(98);
 }
 
 /**
@@ -55,37 +58,35 @@ int _strlen(char *s)
  */
 int main(int argc, char *argv[])
 {
-	char *str, *str2;
-	int length1 = 0, length2 = 0, length, i = 0;
-	int carry, digit1, digit2, *result, a = 0;
+	char *s1, *s2;
+	int len1, len2, len, i, carry, digit1, digit2, *result, a = 0;
 
-	str1 = argv[1], str2 = argv[2];
-	if (argc != 3 || !is_digit(str1) || !is_digit(str2))
+	s1 = argv[1], s2 = argv[2];
+	if (argc != 3 || !is_digit(s1) || !is_digit(s2))
 		errors();
-	length1 = _strlen(str1);
-	length2 = _strlen(str2);
-
-	length = length1 + length2 + 1;
-	result = malloc(sizeof(int) * length);
+	len1 = _strlen(s1);
+	len2 = _strlen(s2);
+	len = len1 + len2 + 1;
+	result = malloc(sizeof(int) * len);
 	if (!result)
 		return (1);
-	for (i = 0; i <= length1 + length2; i++)
+	for (i = 0; i <= len1 + len2; i++)
 		result[i] = 0;
-	for (length1 = length1 - 1; length1 >= 0; length1--)
+	for (len1 = len1 - 1; len1 >= 0; len1--)
 	{
-		digit1 = str1[length1] - '0';
+		digit1 = s1[len1] - '0';
 		carry = 0;
-		for (length2 = length2 - 1; length2 >= 0; length2--)
+		for (len2 = _strlen(s2) - 1; len2 >= 0; len2--)
 		{
-			digit2 = str2[length2] - '0';
-			carry += result[length1 + length2 + 1] + (digit1 * digit2);
-			result[length1 + length2 + 1] = carry % 10;
+			digit2 = s2[len2] - '0';
+			carry += result[len1 + len2 + 1] + (digit1 * digit2);
+			result[len1 + len2 + 1] = carry % 10;
 			carry /= 10;
 		}
 		if (carry > 0)
-			result[length1 + length2 + 1] += carry;
+			result[len1 + len2 + 1] += carry;
 	}
-	for (i = 0; i < length - 1; i++)
+	for (i = 0; i < len - 1; i++)
 	{
 		if (result[i])
 			a = 1;
