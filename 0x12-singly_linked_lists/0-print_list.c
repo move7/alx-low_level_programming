@@ -9,13 +9,13 @@
  */
 int _strlen(char *str)
 {
-        int length = 0;
+	int length = 0;
 
-        if (!str)
-                return (0);
-        while (*str++)
-                length++;
-        return (length);
+	if (!str)
+		return (0);
+	while (*str++)
+		length++;
+	return (length);
 }
 
 /**
@@ -26,16 +26,17 @@ int _strlen(char *str)
  */
 size_t print_list(const list_t *h)
 {
-        size_t sum = 0;
+	size_t sum = 0;
 
-        while (h)
-        {
-                if (!h->str)
-                        printf("[0] (nil)\n");
-                else
-                        printf("[%u] %s\n", _strlen(h->str), h->str);
-                h = h->next;
-                sum++;
-        }
-        return (sum);
+	while (h)
+	{
+		if (!h->str)
+			printf("[0] (nil)\n");
+		else
+			printf("[%u] %s\n", _strlen(h->str), h->str);
+		h = h->next;
+		sum++;
+	}
+	return (sum);
 }
+
