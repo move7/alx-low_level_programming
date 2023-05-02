@@ -25,17 +25,18 @@ node->next = *head;
 *head = node;
 return (node);
 }
-while (i < (idx - 2) && h)
-{
-i++;
-h = h->next;
-}
-if (h)
-{
-node->next = h->next;
-h->next = node;
-return (node);
-}
+for (i = 0; h && i < idx; i++)
+	{
+		if (i == idx - 1)
+		{
+			node->next = h->next;
+			temp->next = node;
+			return (node);
+		}
+		else
+			h = h->next;
+	}
+
 return (NULL);
 }
 
