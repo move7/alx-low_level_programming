@@ -26,17 +26,16 @@ node->next = *head;
 return (node);
 }
 for (i = 0; h && i < idx; i++)
+{
+	if (i == idx - 1)
 	{
-		if (i == idx - 1)
-		{
-			node->next = h->next;
-			h->next = node;
-			return (node);
-		}
-		else
-			h = h->next;
+		node->next = h->next;
+		h->next = node;
+		return (node);
 	}
-
+	else
+		h = h->next;
+}
 return (NULL);
 }
 
