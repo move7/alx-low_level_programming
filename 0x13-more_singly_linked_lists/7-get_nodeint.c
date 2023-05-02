@@ -20,12 +20,9 @@ head = head->next;
 i++;
 }
 if (head)
-{
-node->n = head->n;
-node->next = head->next;
+return (head);
 }
-}
-return (node);
+return(NULL);
 }
 
 
