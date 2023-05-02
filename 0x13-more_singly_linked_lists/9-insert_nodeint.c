@@ -30,7 +30,7 @@ for (i = 0; h && i < idx; i++)
 		if (i == idx - 1)
 		{
 			node->next = h->next;
-			temp->next = node;
+			h->next = node;
 			return (node);
 		}
 		else
