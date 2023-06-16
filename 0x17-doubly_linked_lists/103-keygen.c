@@ -16,7 +16,7 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 {
     char password[7], *codex;
     int len = strlen(argv[1]), i;
-    unsigned char tmp1 = 0, tmp2 = 0, tmp3 = 0, tmp4 = 0, tmp5 = 0;
+    int tmp, tmp1 = 0, tmp2 = 0, tmp3 = 1, tmp4 = 0, tmp5 = 0;
 
     codex = "A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
 
@@ -25,6 +25,7 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
         tmp1 += argv[1][i];
         tmp2 ^= argv[1][i];
         tmp3 *= argv[1][i];
+	tmp = rand();
         if (argv[1][i] > tmp4)
             tmp4 = argv[1][i];
         tmp5 += (argv[1][i] * argv[1][i]);
