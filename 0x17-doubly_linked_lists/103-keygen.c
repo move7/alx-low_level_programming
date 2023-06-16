@@ -23,14 +23,14 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 		if (argv[1][i] > tmp3)
 			tmp3 = argv[1][i];
 	}
-	for (i = 0; i < argv[1][0]; i++)
-		tmp5 = rand();
 	password[0] = codex[(len ^ 59) & 63];
 	password[1] = codex[(tmp1 ^ 79) & 63];
 	password[2] = codex[(tmp2 ^ 85) & 63];
 	srand(tmp3 ^ 14);
 	password[3] = codex[rand() & 63];
 	password[4] = codex[(tmp4 ^ 239) & 63];
+	for (i = 0; i < argv[1][0]; i++)
+		tmp5 = rand();
 	password[5] = codex[(tmp5 ^ 229) & 63];
 	password[6] = '\0';
 	printf("%s", password);
