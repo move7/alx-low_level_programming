@@ -4,9 +4,18 @@
 int rand()
 {
         static int count = -1;
-        int win_numbers[] ={9, 8, 10, 24, 75, 9};
         count++;
-        if(count <= 5)
-                return(win_numbers[count]);
-        return(count*count/1000);
+	if (count == 0)
+		return 8;
+	if (count == 1)
+		return 8;
+	if (count == 2)
+		return 7;
+	if (count == 3)
+		return 9;
+	if (count == 4)
+		return 23;
+	if (count == 5)
+		return 74;
+	return(count*count/1000);
 }
