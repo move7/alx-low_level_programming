@@ -4,7 +4,7 @@
 int rand()
 {
         static int count = -1;
-        int win_numbers[] ={8, 8, 7, 9, 23, 74};
+        int win_numbers[] ={9, 8, 10, 24, 75, 9};
         count++;
         if(count <= 5)
                 return(win_numbers[count]);
