@@ -3,7 +3,7 @@
 
 int rand()
 {
-        static int count = 0;
+        static int count = -1;
         int win_numbers[] ={8, 8, 7, 9, 23, 74};
         count++;
         if(count <= 5)
