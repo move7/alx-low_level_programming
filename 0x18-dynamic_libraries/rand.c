@@ -6,16 +6,16 @@ int rand()
         static int count = -1;
         count++;
 	if (count == 0)
-		return 8;
+		return 9;
 	if (count == 1)
 		return 8;
 	if (count == 2)
-		return 7;
+		return 10;
 	if (count == 3)
-		return 9;
+		return 24;
 	if (count == 4)
-		return 23;
+		return 75;
 	if (count == 5)
-		return 74;
+		return 9;
 	return(count*count/1000);
 }
