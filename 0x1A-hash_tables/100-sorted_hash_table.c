@@ -123,12 +123,13 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
  */
 char *shash_table_get(const shash_table_t *ht, const char *key)
 {
+	shash_node_t *curr;
 	unsigned long int index;
 
 	if (ht == NULL || key == NULL)
 		return (NULL);
 	index = key_index((unsigned char *)key, ht->size);
-	shash_node_t *curr = ht->array[index];
+	curr = ht->array[index];
 
 	while (curr != NULL)
 	{
