@@ -49,7 +49,40 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	if (ht->array[index] == NULL)
 	{
 		ht->array[index] = new_node;
-		insert_sorted_node(ht, new_node);
+		if (ht->shead == NULL)
+		{
+			ht->shead = new_node;
+			ht->stail = new_node;
+		}
+		else if (strcmp(new_node->key, ht->shead->key) < 0)
+		{
+			new_node->snext = ht->shead;
+			ht->shead->sprev = new_node;
+			ht->shead = new_node;
+		}
+		else if (strcmp(new_node->key, ht->stail->key) > 0)
+		{
+			new_node->sprev = ht->stail;
+			ht->stail->snext = new_node;
+			ht->stail = new_node;
+		}
+		else
+		{
+			shash_node_t *curr = ht->shead;
+
+			while (curr != NULL)
+			{
+				if (strcmp(new_node->key, curr->key) < 0)
+				{
+					new_node->sprev = curr->sprev;
+					new_node->snext = curr;
+					curr->sprev->snext = new_node;
+					curr->sprev = new_node;
+					break;
+				}
+				curr = curr->snext;
+			}
+		}
 		return (1);
 	}
 	shash_node_t *curr = ht->array[index];
@@ -69,7 +102,40 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	}
 	new_node->next = ht->array[index];
 	ht->array[index] = new_node;
-	insert_sorted_node(ht, new_node);
+	if (ht->shead == NULL)
+	{
+		ht->shead = new_node;
+		ht->stail = new_node;
+	}
+	else if (strcmp(new_node->key, ht->shead->key) < 0)
+	{
+		new_node->snext = ht->shead;
+		ht->shead->sprev = new_node;
+		ht->shead = new_node;
+	}
+	else if (strcmp(new_node->key, ht->stail->key) > 0)
+	{
+		new_node->sprev = ht->stail;
+		ht->stail->snext = new_node;
+		ht->stail = new_node;
+	}
+	else
+	{
+		shash_node_t *curr = ht->shead;
+
+		while (curr != NULL)
+		{
+			if (strcmp(new_node->key, curr->key) < 0)
+			{
+				new_node->sprev = curr->sprev;
+				new_node->snext = curr;
+				curr->sprev->snext = new_node;
+				curr->sprev = new_node;
+				break;
+			}
+			curr = curr->snext;
+		}
+	}
 	return (1);
 }
 /**
@@ -167,47 +233,3 @@ void shash_table_delete(shash_table_t *ht)
 	free(ht);
 }
 
-/**
- * insert_sorted_node - inserts a new node into the sorted list
- * @ht: the hash table.
- * @node: node to be inserted
- *
- * Return: nothing
- */
-void insert_sorted_node(shash_table_t *ht, shash_node_t *node)
-{
-	if (ht->shead == NULL)
-	{
-		ht->shead = node;
-		ht->stail = node;
-	}
-	else if (strcmp(node->key, ht->shead->key) < 0)
-	{
-		node->snext = ht->shead;
-		ht->shead->sprev = node;
-		ht->shead = node;
-	}
-	else if (strcmp(node->key, ht->stail->key) > 0)
-	{
-		node->sprev = ht->stail;
-		ht->stail->snext = node;
-		ht->stail = node;
-	}
-	else
-	{
-		shash_node_t *curr = ht->shead;
-
-		while (curr != NULL)
-		{
-			if (strcmp(node->key, curr->key) < 0)
-			{
-				node->sprev = curr->sprev;
-				node->snext = curr;
-				curr->sprev->snext = node;
-				curr->sprev = node;
-				break;
-			}
-			curr = curr->snext;
-		}
-	}
-}
