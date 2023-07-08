@@ -34,108 +34,75 @@ shash_table_t *shash_table_create(unsigned long int size)
  */
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
-	shash_node_t *new_node
+	shash_node_t *new, *tmp;
+	char *value_copy;
 	unsigned long int index;
 
-	if (ht == NULL || key == NULL || value == NULL)
+	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
 		return (0);
-	index = key_index((unsigned char *)key, ht->size);
-	new_node = malloc(sizeof(shash_node_t));
-	if (new_node == NULL)
+
+	value_copy = strdup(value);
+	if (value_copy == NULL)
 		return (0);
-	new_node->key = strdup(key);
-	new_node->value = strdup(value);
-	new_node->next = NULL;
-	if (ht->array[index] == NULL)
-	{
-		ht->array[index] = new_node;
-		if (ht->shead == NULL)
-		{
-			ht->shead = new_node;
-			ht->stail = new_node;
-		}
-		else if (strcmp(new_node->key, ht->shead->key) < 0)
-		{
-			new_node->snext = ht->shead;
-			ht->shead->sprev = new_node;
-			ht->shead = new_node;
-		}
-		else if (strcmp(new_node->key, ht->stail->key) > 0)
-		{
-			new_node->sprev = ht->stail;
-			ht->stail->snext = new_node;
-			ht->stail = new_node;
-		}
-		else
-		{
-			shash_node_t *curr = ht->shead;
 
-			while (curr != NULL)
-			{
-				if (strcmp(new_node->key, curr->key) < 0)
-				{
-					new_node->sprev = curr->sprev;
-					new_node->snext = curr;
-					curr->sprev->snext = new_node;
-					curr->sprev = new_node;
-					break;
-				}
-				curr = curr->snext;
-			}
-		}
-		return (1);
-	}
-	shash_node_t *curr = ht->array[index];
-
-	while (curr != NULL)
+	index = key_index((const unsigned char *)key, ht->size);
+	tmp = ht->shead;
+	while (tmp)
 	{
-		if (strcmp(curr->key, key) == 0)
+		if (strcmp(tmp->key, key) == 0)
 		{
-			free(curr->value);
-			curr->value = strdup(value);
-			free(new_node->key);
-			free(new_node->value);
-			free(new_node);
+			free(tmp->value);
+			tmp->value = value_copy;
 			return (1);
 		}
-		curr = curr->next;
+		tmp = tmp->snext;
 	}
-	new_node->next = ht->array[index];
-	ht->array[index] = new_node;
+
+	new = malloc(sizeof(shash_node_t));
+	if (new == NULL)
+	{
+		free(value_copy);
+		return (0);
+	}
+	new->key = strdup(key);
+	if (new->key == NULL)
+	{
+		free(value_copy);
+		free(new);
+		return (0);
+	}
+	new->value = value_copy;
+	new->next = ht->array[index];
+	ht->array[index] = new;
+
 	if (ht->shead == NULL)
 	{
-		ht->shead = new_node;
-		ht->stail = new_node;
+		new->sprev = NULL;
+		new->snext = NULL;
+		ht->shead = new;
+		ht->stail = new;
 	}
-	else if (strcmp(new_node->key, ht->shead->key) < 0)
+	else if (strcmp(ht->shead->key, key) > 0)
 	{
-		new_node->snext = ht->shead;
-		ht->shead->sprev = new_node;
-		ht->shead = new_node;
-	}
-	else if (strcmp(new_node->key, ht->stail->key) > 0)
-	{
-		new_node->sprev = ht->stail;
-		ht->stail->snext = new_node;
-		ht->stail = new_node;
+		new->sprev = NULL;
+		new->snext = ht->shead;
+		ht->shead->sprev = new;
+		ht->shead = new;
 	}
 	else
 	{
-		shash_node_t *curr = ht->shead;
-
-		while (curr != NULL)
-		{
-			if (strcmp(new_node->key, curr->key) < 0)
-			{
-				new_node->sprev = curr->sprev;
-				new_node->snext = curr;
-				curr->sprev->snext = new_node;
-				curr->sprev = new_node;
-				break;
-			}
-			curr = curr->snext;
-		}
+		tmp = ht->shead;
+		while (tmp->snext != NULL && strcmp(tmp->snext->key, key) < 0)
+			tmp = tmp->snext;
+		new->sprev = tmp;
+		new->snext = tmp->snext;
+		if (tmp->snext == NULL)
+			ht->stail = new;
+		else
+			tmp->snext->sprev = new;
+		tmp->snext = new;
 	}
+
 	return (1);
 }
 /**
